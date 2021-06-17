@@ -1,0 +1,55 @@
+bgp_routes:
+  - distance: '200'
+    mask: '24'
+    metric: '0'
+    network: 192.0.2.0
+    nexthop_if: ''
+    nexthop_ip: 172.31.32.213
+    protocol: B
+    type: ''
+    uptime: ''
+  - distance: '200'
+    mask: '24'
+    metric: '0'
+    network: 192.0.3.0
+    nexthop_if: ''
+    nexthop_ip: 172.31.32.213
+    protocol: B
+    type: ''
+    uptime: ''
+  - distance: '200'
+    mask: '24'
+    metric: '0'
+    network: 192.0.4.0
+    nexthop_if: ''
+    nexthop_ip: 172.31.32.213
+    protocol: B
+    type: ''
+    uptime: ''
+  - distance: '200'
+    mask: '24'
+    metric: '0'
+    network: 203.0.113.0
+    nexthop_if: ''
+    nexthop_ip: 172.31.35.140
+    protocol: B
+    type: ''
+    uptime: ''
+  - distance: '200'
+    mask: '24'
+    metric: '0'
+    network: 203.0.114.0
+    nexthop_if: ''
+    nexthop_ip: 172.31.35.140
+    protocol: B
+    type: ''
+    uptime: ''
+  - distance: '200'
+    mask: '24'
+    metric: '0'
+    network: 203.0.115.0
+    nexthop_if: ''
+    nexthop_ip: 172.31.32.1
+    protocol: B
+    type: ''
+    uptime: ''

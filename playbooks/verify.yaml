@@ -1,0 +1,23 @@
+---
+- hosts: all
+  gather_facts: no
+  vars:
+    iosxr: show route bgp
+    ios: show ip route bgp
+  tasks:
+    - include_vars:
+        dir: bgp_oper_data
+        files_matching: "{{ inventory_hostname }}.yaml"
+
+    - name: "Parse BGP routes recevied"
+      ansible.utils.cli_parse:
+        command: "{{ iosxr if 'iosxr' in ansible_network_os else ios }}"
+        parser:
+          name: ansible.netcommon.ntc_templates
+      register: result
+
+    - name: Verify routes received
+      assert:
+        that: "{{ result.parsed | map('combine', {'uptime': ''}) == bgp_routes }}"
+        success_msg: "{{ inventory_hostname }} has received all routes"
+        fail_msg: "{{ inventory_hostname }} did not receive all routes"

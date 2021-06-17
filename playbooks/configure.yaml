@@ -1,0 +1,36 @@
+---
+- hosts: all
+  gather_facts: no
+  collections:
+    - cisco.ios
+    - cisco.iosxr
+  tasks:
+    - name: "CSRv - Configure BGP"
+      ios_bgp_global:
+        config: "{{ bgp_global }}"
+        state: replaced
+      when: ansible_network_os == "cisco.ios.ios"
+
+    - name: "CSRv - Configure BGP Address Family"
+      ios_bgp_address_family:
+        config: "{{ bgp_address_family }}"
+        state: overridden
+      when: ansible_network_os == "cisco.ios.ios"
+
+    - name: "XRv - Configure BGP"
+      iosxr_bgp_global:
+        config: "{{ bgp_global }}"
+        state: replaced
+      when: ansible_network_os == "cisco.iosxr.iosxr"
+
+    - name: "XRv - Configure BGP Address Family"
+      iosxr_bgp_address_family:
+        config: "{{ bgp_address_family }}"
+        state: overridden
+      when: ansible_network_os == "cisco.iosxr.iosxr"
+
+    - name: "XRv - Configure BGP Neighbor Address Family"
+      iosxr_bgp_neighbor_address_family:
+        config: "{{ bgp_neighbor_address_family }}"
+        state: overridden
+      when: ansible_network_os == "cisco.iosxr.iosxr"
