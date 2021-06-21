@@ -18,6 +18,6 @@
 
     - name: Verify routes received
       assert:
-        that: "{{ result.parsed | map('combine', {'uptime': ''}) == bgp_routes }}"
+        that: "{{ result.parsed | map('combine', {'uptime': ''})|symmetric_difference(bgp_routes) == [] }}"
         success_msg: "{{ inventory_hostname }} has received all routes"
         fail_msg: "{{ inventory_hostname }} did not receive all routes"
