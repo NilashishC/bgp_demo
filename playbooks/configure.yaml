@@ -14,6 +14,7 @@
 
     - debug:
         var: result
+      when: result.changed == True
 
     - name: "CSRv - Configure BGP Address Family"
       ios_bgp_address_family:
@@ -24,6 +25,7 @@
     
     - debug:
         var: result
+      when: result.changed == True
 
     - name: "XRv - Configure BGP"
       iosxr_bgp_global:
@@ -34,6 +36,7 @@
     
     - debug:
         var: result
+      when: result.changed == True
 
     - name: "XRv - Configure BGP Address Family"
       iosxr_bgp_address_family:
@@ -44,6 +47,7 @@
     
     - debug:
         var: result
+      when: result.changed == True
 
     - name: "XRv - Configure BGP Neighbor Address Family"
       iosxr_bgp_neighbor_address_family:
@@ -54,3 +58,4 @@
     
     - debug:
         var: result
+      when: result.changed == True

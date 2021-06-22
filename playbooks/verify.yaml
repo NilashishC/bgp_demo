@@ -20,6 +20,6 @@
     - name: Verify routes received
       assert:
         that:
-          - "{{ result['parsed'][0][0]['bgp_routes'] | symmetric_difference(bgp_routes) == [] }}"
+          - "{{ result['parsed'][0][0]['bgp_routes']|d([]) | symmetric_difference(bgp_routes) == [] }}"
         success_msg: "{{ inventory_hostname }} has received all routes"
         fail_msg: "{{ inventory_hostname }} did not receive all routes"
