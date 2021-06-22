@@ -10,27 +10,47 @@
         config: "{{ bgp_global }}"
         state: replaced
       when: ansible_network_os == "cisco.ios.ios"
+      register: result
+
+    - debug:
+        var: result
 
     - name: "CSRv - Configure BGP Address Family"
       ios_bgp_address_family:
         config: "{{ bgp_address_family }}"
         state: overridden
       when: ansible_network_os == "cisco.ios.ios"
+      register: result
+    
+    - debug:
+        var: result
 
     - name: "XRv - Configure BGP"
       iosxr_bgp_global:
         config: "{{ bgp_global }}"
         state: replaced
       when: ansible_network_os == "cisco.iosxr.iosxr"
+      register: result
+    
+    - debug:
+        var: result
 
     - name: "XRv - Configure BGP Address Family"
       iosxr_bgp_address_family:
         config: "{{ bgp_address_family }}"
         state: overridden
       when: ansible_network_os == "cisco.iosxr.iosxr"
+      register: result
+    
+    - debug:
+        var: result
 
     - name: "XRv - Configure BGP Neighbor Address Family"
       iosxr_bgp_neighbor_address_family:
         config: "{{ bgp_neighbor_address_family }}"
         state: overridden
       when: ansible_network_os == "cisco.iosxr.iosxr"
+      register: result
+    
+    - debug:
+        var: result

@@ -1,61 +1,37 @@
 bgp_routes:
   - distance: '200'
-    interface: ''
     mask: '24'
     metric: '0'
     network: 192.0.2.0
-    next_hop: 172.31.32.213
+    nexthop_ip: 172.31.32.213
     protocol: B
-    type: via
-    uptime: ''
-    vrf: ''
   - distance: '200'
-    interface: ''
     mask: '24'
     metric: '0'
     network: 192.0.3.0
-    next_hop: 172.31.32.213
+    nexthop_ip: 172.31.32.213
     protocol: B
-    type: via
-    uptime: ''
-    vrf: ''
   - distance: '200'
-    interface: ''
     mask: '24'
     metric: '0'
     network: 192.0.4.0
-    next_hop: 172.31.32.213
+    nexthop_ip: 172.31.32.213
     protocol: B
-    type: via
-    uptime: ''
-    vrf: ''
   - distance: '200'
-    interface: ''
     mask: '24'
     metric: '0'
     network: 198.51.100.0
-    next_hop: 172.31.34.28
+    nexthop_ip: 172.31.34.28
     protocol: B
-    type: via
-    uptime: ''
-    vrf: ''
   - distance: '200'
-    interface: ''
     mask: '24'
     metric: '0'
     network: 198.51.101.0
-    next_hop: 172.31.34.28
+    nexthop_ip: 172.31.34.28
     protocol: B
-    type: via
-    uptime: ''
-    vrf: ''
   - distance: '200'
-    interface: ''
     mask: '24'
     metric: '0'
     network: 198.51.102.0
-    next_hop: 172.31.34.28
+    nexthop_ip: 172.31.34.28
     protocol: B
-    type: via
-    uptime: ''
-    vrf: ''

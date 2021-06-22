@@ -1,0 +1,3 @@
+<group name="bgp_routes">
+{{ protocol }} {{ network }}/{{ mask }} [{{ distance }}/{{ metric }}] via {{ nexthop_ip }}, {{ ignore }}
+</group>

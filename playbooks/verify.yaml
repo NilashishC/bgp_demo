@@ -13,11 +13,13 @@
       ansible.utils.cli_parse:
         command: "{{ iosxr if 'iosxr' in ansible_network_os else ios }}"
         parser:
-          name: ansible.netcommon.ntc_templates
+          name: ansible.utils.ttp
+          template_path: "{{ playbook_dir }}/templates/bgp_routes.ttp"
       register: result
 
     - name: Verify routes received
       assert:
-        that: "{{ result.parsed | map('combine', {'uptime': ''})| list | symmetric_difference(bgp_routes) == [] }}"
+        that:
+          - "{{ result['parsed'][0][0]['bgp_routes'] | symmetric_difference(bgp_routes) == [] }}"
         success_msg: "{{ inventory_hostname }} has received all routes"
         fail_msg: "{{ inventory_hostname }} did not receive all routes"
