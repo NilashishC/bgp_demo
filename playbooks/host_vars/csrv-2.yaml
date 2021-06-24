@@ -8,8 +8,6 @@ bgp_address_family:
             address: 172.31.35.140
         network:
         -   address: 198.51.100.0
-        -   address: 198.51.101.0
-        -   address: 198.51.102.0
     as_number: '65536'
 bgp_global:
     as_number: '65536'
