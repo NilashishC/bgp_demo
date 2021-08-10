@@ -3,9 +3,8 @@ bgp_address_family:
     -   afi: ipv4
         neighbor:
         -   activate: true
-            address: 172.31.32.213
-        -   activate: true
-            address: 172.31.35.140
+            address: 172.31.47.175
+            soft_reconfiguration: true
         network:
         -   address: 198.51.100.0
         -   address: 198.51.101.0
@@ -15,12 +14,8 @@ bgp_global:
     as_number: '65536'
     bgp:
         log_neighbor_changes: true
+        router_id:
+            address: 172.31.39.212
     neighbor:
-    -   address: 172.31.32.213
+    -   address: 172.31.47.175
         remote_as: 65536
-    -   address: 172.31.35.140
-        remote_as: 65536
-    -   activate: true
-        address: 172.31.32.213
-    -   activate: true
-        address: 172.31.35.140

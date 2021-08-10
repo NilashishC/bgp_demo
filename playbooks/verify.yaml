@@ -1,25 +1,18 @@
 ---
 - hosts: all
   gather_facts: no
-  vars:
-    iosxr: show route bgp
-    ios: show ip route bgp
   tasks:
-    - include_vars:
-        dir: bgp_oper_data
-        files_matching: "{{ inventory_hostname }}.yaml"
-
     - name: "Parse BGP routes recevied"
       ansible.utils.cli_parse:
-        command: "{{ iosxr if 'iosxr' in ansible_network_os else ios }}"
+        command: show ip route bgp
         parser:
-          name: ansible.utils.ttp
-          template_path: "{{ playbook_dir }}/templates/bgp_routes.ttp"
+          name: ansible.netcommon.pyats
       register: result
 
-    - name: Verify routes received
-      assert:
-        that:
-          - "{{ result['parsed'][0][0]['bgp_routes']|d([]) | symmetric_difference(bgp_routes) == [] }}"
-        success_msg: "{{ inventory_hostname }} has received all routes"
-        fail_msg: "{{ inventory_hostname }} did not receive all routes"
+    - name: "Validate BGP Routes received"
+      ansible.utils.validate:
+        data: "{{ result['parsed'] }}"
+        criteria:
+          - "{{ lookup('file',  'bgp_schema/{{ inventory_hostname }}.json') | from_json }}"
+        engine: ansible.utils.jsonschema
+

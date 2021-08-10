@@ -19,13 +19,3 @@
           - "no network 198.51.102.0"
         match: none
       when: inventory_hostname == "csrv-2"
-    
-    - name: Init XRv-1
-      cisco.iosxr.iosxr_config:
-        lines:
-          - "router bgp 65536"
-          - "address-family ipv4 unicast"
-          - "no network 203.0.114.0/24"
-          - "no network 203.0.115.0/24"
-        match: none
-      when: inventory_hostname== "xrv-1"

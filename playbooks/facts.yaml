@@ -6,18 +6,10 @@
 
     - name: "CSRv - Gather existing facts from a Brownfield Environment"
       cisco.ios.ios_facts:
+        gather_subset: ["!all", "!min"]
         gather_network_resources:
           - bgp_global
           - bgp_address_family
-      when: ansible_network_os == "cisco.ios.ios"
-
-    - name: "XRv - Gather existing facts from a Brownfield Environment"
-      cisco.iosxr.iosxr_facts:
-        gather_network_resources:
-          - bgp_global
-          - bgp_neighbor_address_family
-          - bgp_address_family
-      when: ansible_network_os == "cisco.iosxr.iosxr"
 
     - name: "CSRv - Store gathered facts in a flat file - SoT"
       copy:

@@ -1,0 +1,57 @@
+{
+    "type": "object",
+    "patternProperties": {
+        "vrf": {
+            "type": "object",
+            "properties": {
+                "default": {
+                    "type": "object",
+                    "properties": {
+                        "address_family": {
+                            "type": "object",
+                            "properties": {
+                                "ipv4": {
+                                    "type": "object",
+                                    "properties": {
+                                        "routes": {
+                                            "type": "object",
+                                            "patternProperties": {
+                                                "192.0.[2-4].0/24": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "active": {
+                                                            "type": "boolean",
+                                                            "const": true
+                                                        },
+                                                        "source_protocol": {
+                                                            "type": "string",
+                                                            "const": "bgp"
+                                                        },
+                                                        "route_preference": {
+                                                            "type": "integer",
+                                                            "const": 200
+                                                        },
+                                                        "metric": {
+                                                            "type": "integer",
+                                                            "const": 0  
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "additionalProperties": false,
+                                            "minProperties": 3,
+                                            "maxProperties": 3
+                                        }
+                                    },
+                                    "required": [
+                                        "routes"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
