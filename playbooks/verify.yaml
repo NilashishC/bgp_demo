@@ -2,17 +2,42 @@
 - hosts: all
   gather_facts: no
   tasks:
-    - name: "Parse BGP routes recevied"
-      ansible.utils.cli_parse:
-        command: show ip route bgp
-        parser:
-          name: ansible.netcommon.pyats
-      register: result
+    - name: Verify operational state data and remediate if necessary
+      block:
+        - name: "Gather and parse operational data - BGP routes recevied"
+          ansible.utils.cli_parse:
+            command: show ip route bgp
+            parser:
+              name: ansible.netcommon.pyats
+          register: result
 
-    - name: "Validate BGP Routes received"
-      ansible.utils.validate:
-        data: "{{ result['parsed'] }}"
-        criteria:
-          - "{{ lookup('file',  'bgp_schema/{{ inventory_hostname }}.json') | from_json }}"
-        engine: ansible.utils.jsonschema
+        - name: "Validate BGP Routes received"
+          ansible.utils.validate:
+            data: "{{ result['parsed']['vrf']['default']['address_family'] }}"
+            criteria: "{{ lookup('file',  'bgp_schema/{{ inventory_hostname }}.json') | from_json }}"
+            engine: ansible.utils.jsonschema
 
+      rescue:
+        - debug:
+            msg: "Operational state validation failed - Remediating configuration drift!"
+
+        - name: "CSRv - Configure BGP"
+          cisco.ios.ios_bgp_global:
+            config: "{{ bgp_global }}"
+            state: replaced
+          register: result
+
+        - name: "Commands sent"
+          debug: &display
+            var: result['commands']
+          when: result.changed == True
+
+        - name: "CSRv - Configure BGP Address Family"
+          cisco.ios.ios_bgp_address_family:
+            config: "{{ bgp_address_family }}"
+            state: overridden
+          register: result
+        
+        - name: "Commands sent"
+          debug: *display
+          when: result.changed == True

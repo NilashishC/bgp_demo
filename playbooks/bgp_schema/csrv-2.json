@@ -1,57 +1,63 @@
 {
     "type": "object",
     "patternProperties": {
-        "vrf": {
+        "ipv4": {
             "type": "object",
             "properties": {
-                "default": {
+                "routes": {
                     "type": "object",
-                    "properties": {
-                        "address_family": {
+                    "patternProperties": {
+                        "192.0.[2-4].0/24": {
                             "type": "object",
                             "properties": {
-                                "ipv4": {
-                                    "type": "object",
-                                    "properties": {
-                                        "routes": {
-                                            "type": "object",
-                                            "patternProperties": {
-                                                "192.0.[2-4].0/24": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "active": {
-                                                            "type": "boolean",
-                                                            "const": true
-                                                        },
-                                                        "source_protocol": {
-                                                            "type": "string",
-                                                            "const": "bgp"
-                                                        },
-                                                        "route_preference": {
-                                                            "type": "integer",
-                                                            "const": 200
-                                                        },
-                                                        "metric": {
-                                                            "type": "integer",
-                                                            "const": 0  
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "additionalProperties": false,
-                                            "minProperties": 3,
-                                            "maxProperties": 3
-                                        }
-                                    },
-                                    "required": [
-                                        "routes"
-                                    ]
+                                "active": {
+                                    "type": "boolean",
+                                    "const": true
+                                },
+                                "source_protocol": {
+                                    "type": "string",
+                                    "const": "bgp"
+                                },
+                                "route_preference": {
+                                    "type": "integer",
+                                    "const": 200
+                                },
+                                "metric": {
+                                    "type": "integer",
+                                    "const": 0
+                                }
+                            }
+                        },
+                        "203.0.11[3-5].0/24": {
+                            "type": "object",
+                            "properties": {
+                                "active": {
+                                    "type": "boolean",
+                                    "const": true
+                                },
+                                "source_protocol": {
+                                    "type": "string",
+                                    "const": "bgp"
+                                },
+                                "route_preference": {
+                                    "type": "integer",
+                                    "const": 200
+                                },
+                                "metric": {
+                                    "type": "integer",
+                                    "const": 0
                                 }
                             }
                         }
-                    }
+                    },
+                    "additionalProperties": false,
+                    "minProperties": 6,
+                    "maxProperties": 6
                 }
-            }
+            },
+            "required": [
+                "routes"
+            ]
         }
     }
 }
