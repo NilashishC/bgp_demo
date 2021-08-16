@@ -2,8 +2,6 @@
 - hosts: all
   gather_facts: no
   tasks:
-    - include_tasks: pre.yaml
-
     - name: "CSRv - Gather existing facts from a Brownfield Environment"
       cisco.ios.ios_facts:
         gather_subset: ["!all", "!min"]
