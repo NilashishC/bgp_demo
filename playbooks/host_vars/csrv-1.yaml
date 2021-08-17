@@ -3,9 +3,6 @@ bgp_address_family:
     -   afi: ipv4
         neighbor:
         -   activate: true
-            address: 172.31.47.212
-            soft_reconfiguration: true
-        -   activate: true
             address: 172.31.47.206
             soft_reconfiguration: true
         network:
