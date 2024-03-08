@@ -1,6 +1,6 @@
 ---
-- hosts: rtr1
-  gather_facts: true
+- hosts: all
+  gather_facts: false
   tasks:
     - name: Network Backup and Resource Manager
       ansible.builtin.include_role:
@@ -9,4 +9,4 @@
         operation: backup
         type: full
         data_store:
-          local: "./network_local_backup/network"
+          local: "./network"
